@@ -1,0 +1,12 @@
+name = "test-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+account_id = "8b6bb5691df06a7d0f0599b3c4841f47"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "test-center-db"
+database_id = "0d549711-3c5a-4e59-913c-d696d0e6b8c9"
+
+[vars]
+ENVIRONMENT = "production"
