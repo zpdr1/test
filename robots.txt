@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://test.7e.ink/sitemap.xml
