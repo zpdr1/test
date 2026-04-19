@@ -55,8 +55,69 @@ CREATE TABLE test_results (
   test_type TEXT NOT NULL,
   result_type TEXT,
   result_data TEXT,
+  slot INTEGER DEFAULT 0,  -- 存档槽：0=自动存档, 1-4=手动存档
   created_at INTEGER
 );
+```
+
+## 💾 存档系统
+
+### 设计原则
+
+每个用户每个测试类型最多 **5 个存档**：
+
+| 存档槽 | 名称 | 保存方式 | 说明 |
+|--------|------|----------|------|
+| 0 | 自动存档 | 自动 | 完成测试后自动保存，覆盖之前的自动存档 |
+| 1 | 存档 1 | 手动 | 用户手动保存 |
+| 2 | 存档 2 | 手动 | 用户手动保存 |
+| 3 | 存档 3 | 手动 | 用户手动保存 |
+| 4 | 存档 4 | 手动 | 用户手动保存 |
+
+### 使用规则
+
+1. **自动存档（slot 0）**
+   - 完成测试后自动保存到 slot 0
+   - 新结果会覆盖旧结果
+   - 不可删除，只能被新结果覆盖
+
+2. **手动存档（slot 1-4）**
+   - 用户在结果页面点击"保存到存档"
+   - 选择空白存档槽或覆盖已有存档
+   - 可以删除
+
+3. **读档**
+   - 登录后可以查看所有存档
+   - 点击存档可以查看详细结果
+   - 测试页面会提示是否有存档
+
+### API 接口
+
+| 接口 | 方法 | 说明 |
+|------|------|------|
+| `/api/results` | POST | 保存结果（指定 slot 参数） |
+| `/api/results` | GET | 获取所有存档 |
+| `/api/results/:slot` | GET | 读取指定存档 |
+| `/api/results/:slot` | DELETE | 删除存档（slot 0 不可删） |
+| `/api/results/latest` | GET | 获取自动存档（兼容旧 API） |
+
+### 前端调用示例
+
+```javascript
+// 自动保存（slot 0）
+TestAuth.saveTestResult(resultData);
+
+// 手动保存到指定槽
+TestAuth.saveToSlot(resultData, 1);
+
+// 获取所有存档
+const { saves } = await TestAuth.getAllSaves();
+
+// 读取指定存档
+const { result } = await TestAuth.loadSave(1);
+
+// 删除存档
+await TestAuth.deleteSave(1);
 ```
 
 ## 🔐 OAuth 配置
