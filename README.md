@@ -15,7 +15,7 @@
 |------|------|------|------|
 | 沙壁人格测试 | SBTI | https://sbti.7e.ink | ✅ 已上线 |
 | 政治领导人测试 | PLTI | https://plti.7e.ink | ✅ 已上线 |
-| 爱情观测试 | LVTI | https://lvti.7e.ink | 🚧 即将上线 |
+| 爱情观测试 | LVTI | https://lvti.7e.ink | ✅ 已开发 |
 | 财商测试 | CKTI | https://ckti.7e.ink | 🚧 即将上线 |
 
 ## 🛠 技术架构
