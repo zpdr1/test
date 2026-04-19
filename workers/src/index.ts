@@ -24,7 +24,7 @@ app.use('/*', cors({
 // 验证 Token 中间件
 async function verifyToken(c: any, token: string) {
   try {
-    const response = await fetch('https://auth.7e.ink/oauth/userinfo', {
+    const response = await fetch('https://api-auth.7e.ink/oauth/userinfo', {
       headers: { Authorization: `Bearer ${token}` }
     })
     if (!response.ok) return null
