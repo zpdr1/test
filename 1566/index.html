@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>大明王朝1566 · 你是剧中哪位人物</title>
+  <meta name="description" content="40道测题，探君心志。看看你与《大明王朝1566》中哪位人物最为相近。">
+  <link rel="canonical" href="https://1566.7e.ink">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="大明王朝1566 · 人物性格测试">
+  <meta property="og:description" content="40道测题，探君心志。看看你与剧中哪位人物最为相近。">
+  <meta property="og:url" content="https://1566.7e.ink">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 封面页 -->
+  <div id="cover">
+    <div class="cc tl"></div>
+    <div class="cc tr"></div>
+    <div class="cc bl"></div>
+    <div class="cc br"></div>
+    
+    <div class="eyebrow"><span>大明嘉靖年间</span></div>
+    <div class="cover-title">大明王朝</div>
+    <div class="cover-year">壹 · 五 · 六 · 六</div>
+    <div class="cover-sub">人 物 性 格 测 试</div>
+    <div class="ornament"><span>✦</span></div>
+    
+    <div class="cover-quote">
+      任何一句话，你不说出来便是那句话的主人，你说了出来，便是那句话的奴隶。
+      <span class="quote-author">——刘和平</span>
+    </div>
+    
+    <div class="cover-info">
+      共 <em id="q-count">40</em> 道测题，探君心志<br>
+      看看你与剧中哪位人物最为相近
+    </div>
+
+    <!-- 版本切换 -->
+    <div class="mode-switcher">
+      <button class="mode-btn active" data-mode="classic" onclick="switchMode('classic')">原汁原味</button>
+      <button class="mode-btn" data-mode="mbti" onclick="switchMode('mbti')">MBTI 版</button>
+    </div>
+
+    <button id="btn-start" onclick="startQuiz()">开 始 测 试</button>
+    
+    <div class="cover-chars">17 位角色等你解锁 · 帝王将相 · 忠臣奸佞 · 悲剧英雄</div>
+    
+    <!-- 登录栏 -->
+    <div id="auth-bar"></div>
+    
+    <div class="cover-footer">
+      <div class="social-links">
+        <a href="https://test.7e.ink" class="social-link">← 测试中心</a>
+        <a href="https://7e.ink" class="social-link">七亿主页</a>
+      </div>
+      <p class="copyright">内容来源于《大明王朝1566》，版权归属优酷所有</p>
+      <p class="copyright small">本测试纯属个人兴趣制作，无任何商业目的</p>
+    </div>
+  </div>
+
+  <!-- 答题页 -->
+  <div id="quiz">
+    <div class="qsticky">
+      <div class="qsticky-inner">
+        <div class="qhead-lbl">人物测试</div>
+        <div class="prog-row">
+          <div class="prog-track">
+            <div class="prog-fill" id="pfill"></div>
+          </div>
+          <div class="prog-lbl"><b id="pnum">0</b> / <span id="ptotal">40</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="q-container">
+      <div id="q-card">
+        <span class="qnum-badge" id="q-badge">第 1 题</span>
+        <div class="qtext" id="q-text"></div>
+        <div class="opts" id="q-opts"></div>
+        <div class="q-nav">
+          <button class="q-nav-btn" id="btn-prev" onclick="prevQuestion()">← 上一题</button>
+          <button class="q-nav-btn primary" id="btn-next" onclick="nextQuestion()">下一题 →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 结果页 - 原版 -->
+  <div id="result">
+    <div class="res-ey">测试完成</div>
+    <div class="res-hl">你的人物类型是</div>
+    <div class="res-card" id="res-card"></div>
+    <div class="also-box" id="also-box"></div>
+    <div class="action-btns">
+      <button id="btn-share" onclick="shareResult()">📤 分享结果</button>
+      <button id="btn-retry" onclick="retryQuiz()">重新测试</button>
+    </div>
+    <div id="auth-result-bar"></div>
+  </div>
+
+  <!-- 结果页 - MBTI版 -->
+  <div id="mbti-result" class="mbti-result"></div>
+
+  <!-- 海报弹窗 -->
+  <div id="poster-modal">
+    <button class="poster-close" onclick="closePoster()">×</button>
+    <canvas id="poster-canvas" width="750" height="1334"></canvas>
+    <div class="poster-tip">长按保存图片，分享给好友</div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      TestAuth.init('1566');
+    });
+  </script>
+  <script src="auth-ui.js"></script>
+</body>
+</html>
