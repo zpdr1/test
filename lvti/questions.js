@@ -92,7 +92,7 @@ const QUESTIONS = [
   {
     id: 8,
     type: "表达方式",
-    question: "你有多久没说"我爱你"了？",
+    question: "你有多久没说「我爱你」了？",
     options: [
       { text: "想不起来，很久没说了", scores: { S: 2 } },
       { text: "偶尔说，不是每天", scores: { S: 1 } },
@@ -108,13 +108,13 @@ const QUESTIONS = [
       { text: "默默陪在身边，做些力所能及的事", scores: { S: 2 } },
       { text: "尝试安慰，但不太会说好听的话", scores: { S: 1 } },
       { text: "主动询问原因，鼓励TA说出来", scores: { E: 1 } },
-      { text: "抱住TA，反复说"我在这里"", scores: { E: 2 } }
+      { text: "抱住TA，反复说「我在这里」", scores: { E: 2 } }
     ]
   },
   {
     id: 10,
     type: "表达方式",
-    question: "收到伴侣的消息"想你了"，你回复？",
+    question: "收到伴侣的消息「想你了」，你回复？",
     options: [
       { text: "嗯/好的/知道了", scores: { S: 2 } },
       { text: "我也想你", scores: { S: 1, E: 1 } },
@@ -138,7 +138,7 @@ const QUESTIONS = [
   {
     id: 12,
     type: "承诺态度",
-    question: "你如何看待"永远"这个承诺？",
+    question: "你如何看待「永远」这个承诺？",
     options: [
       { text: "不轻易说永远，太沉重了", scores: { F: 2 } },
       { text: "可以承诺，但心里知道变数很多", scores: { F: 1 } },
@@ -149,7 +149,7 @@ const QUESTIONS = [
   {
     id: 13,
     type: "承诺态度",
-    question: "关于"见家长"，你的态度是？",
+    question: "关于「见家长」，你的态度是？",
     options: [
       { text: "太早了，不想有压力", scores: { F: 2 } },
       { text: "等关系稳定了再说", scores: { F: 1 } },
@@ -160,7 +160,7 @@ const QUESTIONS = [
   {
     id: 14,
     type: "承诺态度",
-    question: "伴侣提出签"恋爱协议"或"婚前协议"，你？",
+    question: "伴侣提出签「恋爱协议」或「婚前协议」，你？",
     options: [
       { text: "可以理解，这是理性的表现", scores: { F: 1, B: 1 } },
       { text: "能接受，但对感情有点冷冰冰", scores: { F: 1 } },
@@ -217,7 +217,7 @@ const QUESTIONS = [
   {
     id: 19,
     type: "冲突处理",
-    question: "你如何看待感情中的"冷暴力"？",
+    question: "你如何看待感情中的「冷暴力」？",
     options: [
       { text: "有时需要冷静一下，可以理解", scores: { A: 2 } },
       { text: "偶尔沉默还好，不能太久", scores: { A: 1 } },

@@ -46,7 +46,7 @@ const QUESTIONS = [
   {
     id: 4,
     type: "消费习惯",
-    question: "关于"奢侈品"，你的态度是？",
+    question: "关于“奢侈品“，你的态度是？",
     options: [
       { text: "完全不考虑，消费主义陷阱", scores: { F: 2 } },
       { text: "不会主动买，别人送可以接受", scores: { F: 1 } },
@@ -81,7 +81,7 @@ const QUESTIONS = [
   {
     id: 7,
     type: "投资态度",
-    question: "关于"投资"，你更认同哪句话？",
+    question: "关于“投资“，你更认同哪句话？",
     options: [
       { text: "保住本金比赚钱更重要", scores: { C: 2 } },
       { text: "稳健收益，不追求暴富", scores: { C: 1 } },
@@ -114,7 +114,7 @@ const QUESTIONS = [
   {
     id: 10,
     type: "投资态度",
-    question: "你对"财务自由"的态度是？",
+    question: "你对“财务自由“的态度是？",
     options: [
       { text: "稳健积累，慢慢来", scores: { C: 2 } },
       { text: "有一定的规划，但不过分追求", scores: { C: 1 } },
@@ -127,7 +127,7 @@ const QUESTIONS = [
   {
     id: 11,
     type: "风险偏好",
-    question: "朋友推荐一个"稳赚"的投资项目，你会？",
+    question: "朋友推荐一个“稳赚“的投资项目，你会？",
     options: [
       { text: "完全不信，天上不会掉馅饼", scores: { R: 2 } },
       { text: "先了解清楚，再做决定", scores: { R: 1 } },
@@ -171,7 +171,7 @@ const QUESTIONS = [
   {
     id: 15,
     type: "风险偏好",
-    question: "关于"借钱给别人"，你的态度是？",
+    question: "关于“借钱给别人“，你的态度是？",
     options: [
       { text: "基本不借，救急不救穷", scores: { R: 2 } },
       { text: "看关系亲疏，借了就当可能要不回", scores: { R: 1 } },
@@ -195,7 +195,7 @@ const QUESTIONS = [
   {
     id: 17,
     type: "理财意识",
-    question: "关于"预算"，你的做法是？",
+    question: "关于“预算“，你的做法是？",
     options: [
       { text: "每月详细规划，严格执行", scores: { P: 2 } },
       { text: "心里有数，大致控制", scores: { P: 1 } },
@@ -217,7 +217,7 @@ const QUESTIONS = [
   {
     id: 19,
     type: "理财意识",
-    question: "关于"理财目标"，你有吗？",
+    question: "关于“理财目标“，你有吗？",
     options: [
       { text: "有明确的短期、中期、长期目标", scores: { P: 2 } },
       { text: "有大致规划，但不够具体", scores: { P: 1 } },

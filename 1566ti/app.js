@@ -47,7 +47,7 @@ function loadQuestion() {
   // 渲染选项
   const optsContainer = document.getElementById('q-opts');
   optsContainer.innerHTML = q.opts.map((opt, i) => `
-    <label class="opt${answers[currentQuestion] === i ? ' sel' : ''}" onclick="selectOption(${i})">
+    <label class="opt${answers[currentQuestion] === i ? ' sel' : ''}" onclick="selectOption(${i}, event)">
       <input type="radio" name="q${currentQuestion}" value="${i}">
       <span class="opt-dot">${String.fromCharCode(65 + i)}</span>
       <span class="opt-txt">${opt.t}</span>
@@ -61,7 +61,12 @@ function loadQuestion() {
 }
 
 // 选择选项
-function selectOption(index) {
+function selectOption(index, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  
   answers[currentQuestion] = index;
   
   // 更新UI
@@ -412,7 +417,7 @@ function closePoster() {
 document.addEventListener('keydown', function(e) {
   if (document.getElementById('quiz').style.display === 'flex') {
     if (e.key >= '1' && e.key <= '3') {
-      selectOption(parseInt(e.key) - 1);
+      selectOption(parseInt(e.key) - 1, null);
     } else if (e.key === 'ArrowLeft') {
       prevQuestion();
     } else if (e.key === 'ArrowRight' && answers[currentQuestion] !== null) {
@@ -422,3 +427,72 @@ document.addEventListener('keydown', function(e) {
     }
   }
 });
+
+// AI 评价功能
+async function getAIComment() {
+  const section = document.getElementById('ai-section');
+  const textEl = document.getElementById('ai-text');
+  const btn = document.getElementById('btn-ai');
+  
+  section.classList.add('show');
+  textEl.className = 'ai-text loading';
+  textEl.textContent = 'AI 正在分析你的角色...';
+  btn.disabled = true;
+  btn.textContent = '🤔 分析中...';
+  
+  // 获取测试结果
+  const result = JSON.parse(sessionStorage.getItem('daming1566_result') || '{}');
+  const char = DATA.chars.find(c => c.name === result.charName);
+  
+  if (!char) {
+    textEl.className = 'ai-text';
+    textEl.textContent = '请先完成测试再来获取 AI 评价~';
+    btn.disabled = false;
+    btn.textContent = '🤖 AI 评价';
+    return;
+  }
+  
+  // 构建 prompt
+  const prompt = `你是《明朝那些事儿》风格的歷史解説家。請用風趣幽默、博學多才的語氣評價以下《大明王朝1566》人物，150字左右：
+
+人物：${char.name}
+${char.title ? '職稱：' + char.title : ''}
+性格特點：${char.traits.join('、')}
+人物簡介：${char.desc.substring(0, 100)}
+
+要求：結合劇情點評，語氣生動有趣，可以適當調侃，但要有歷史底蘊。`;
+
+  try {
+    const response = await fetch('https://api-ai.7e.ink/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer sk-144b194p48250x5f6928401j082m2d0p'
+      },
+      body: JSON.stringify({
+        model: 'qwen3-1',
+        messages: [
+          { role: 'system', content: '你是一個博學多才、幽默風趣的歷史解説家，擅長用生動有趣的語言點評歷史人物。' },
+          { role: 'user', content: prompt }
+        ],
+        max_tokens: 500
+      })
+    });
+    
+    const data = await response.json();
+    const content = data.choices?.[0]?.message?.content || '抱歉，AI 暂时无法生成评价，请稍后再试。';
+    
+    textEl.className = 'ai-text';
+    textEl.textContent = content;
+  } catch (err) {
+    textEl.className = 'ai-text';
+    textEl.textContent = 'AI 评价生成失败，请检查网络后重试。';
+    console.error('AI error:', err);
+  }
+  
+  btn.disabled = false;
+  btn.textContent = '🤖 AI 评价';
+}
+
+// 分享时更新链接为正确的域名
+const originalShareResult = shareResult;

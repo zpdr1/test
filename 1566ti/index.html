@@ -92,7 +92,15 @@
     <div class="also-box" id="also-box"></div>
     <div class="action-btns">
       <button id="btn-share" onclick="shareResult()">📤 分享结果</button>
+      <button id="btn-ai" onclick="getAIComment()">🤖 AI 评价</button>
       <button id="btn-retry" onclick="retryQuiz()">重新测试</button>
+    </div>
+
+    <!-- AI 评价区域 -->
+    <div class="ai-section" id="ai-section">
+      <h4>🤖 AI 对你的评价</h4>
+      <p class="ai-text" id="ai-text"></p>
+      <button class="ai-btn" id="ai-btn" onclick="getAIComment()">重新生成</button>
     </div>
   </div>
 
