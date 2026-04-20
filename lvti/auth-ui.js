@@ -38,6 +38,33 @@
       btnText: '#fff',
       borderColor: '#d8c7b2'
     },
+    daming: {
+      bg: 'rgba(30, 20, 10, 0.95)',
+      text: 'rgba(201, 168, 76, 0.95)',
+      muted: 'rgba(201, 168, 76, 0.5)',
+      accent: '#c9a84c',
+      btnBg: 'linear-gradient(135deg, #8b0000, #c9a84c)',
+      btnText: '#fff',
+      borderColor: 'rgba(201, 168, 76, 0.2)'
+    },
+    love: {
+      bg: 'rgba(255, 240, 245, 0.95)',
+      text: '#8b4557',
+      muted: '#c48b9f',
+      accent: '#ff6b9d',
+      btnBg: 'linear-gradient(135deg, #ff6b9d, #ff8fab)',
+      btnText: '#fff',
+      borderColor: 'rgba(255, 107, 157, 0.2)'
+    },
+    gold: {
+      bg: 'rgba(255, 250, 240, 0.95)',
+      text: '#5c4a1f',
+      muted: '#9a8543',
+      accent: '#d4a017',
+      btnBg: 'linear-gradient(135deg, #d4a017, #f0c040)',
+      btnText: '#2d1f00',
+      borderColor: 'rgba(212, 160, 23, 0.3)'
+    },
     light: {
       bg: 'rgba(255, 255, 255, 0.95)',
       text: '#1f2937',
@@ -196,13 +223,8 @@
       }
     }
     
-    /* 深色主题特殊处理 */
-    .auth-bar-dark .auth-bar-title {
-      color: rgba(255, 255, 255, 0.9);
-    }
-    
-    /* 纸张主题特殊处理 */
-    .auth-bar-paper {
+    /* 大明王朝主题特殊字体 */
+    .auth-bar-daming {
       font-family: "Noto Serif SC", "Source Han Serif SC", serif;
     }
   `;

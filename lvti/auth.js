@@ -1,6 +1,6 @@
 /**
  * 七亿测试中心 - 统一认证模块
- * 支持 SBTI、PLTI 等测试项目的 OAuth 登录和存档管理
+ * 支持 SBTI、PLTI、LVTI、CKTI、1566 等测试项目的 OAuth 登录和存档管理
  */
 
 // 各项目的测试类型
@@ -9,7 +9,7 @@ const TEST_TYPES = {
   'plti.7e.ink': 'plti',
   'lvti.7e.ink': 'lvti',
   'ckti.7e.ink': 'ckti',
-  '1566.7e.ink': '1566'
+  '1566ti.7e.ink': '1566'
 };
 
 // 根据域名获取测试类型

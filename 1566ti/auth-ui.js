@@ -5,20 +5,18 @@
  */
 
 (function() {
-  // 检测当前项目风格
   function detectTheme() {
     const hostname = window.location.hostname;
     if (hostname.includes('sbti')) return 'dark';
     if (hostname.includes('plti')) return 'paper';
-    if (hostname.includes('1566')) return 'daming'; // 大明王朝古风主题
-    if (hostname.includes('lvti')) return 'love';   // 爱情观粉色主题
-    if (hostname.includes('ckti')) return 'gold';   // 财商金色主题
-    return 'light'; // test.7e.ink
+    if (hostname.includes('1566')) return 'daming';
+    if (hostname.includes('lvti')) return 'love';
+    if (hostname.includes('ckti')) return 'gold';
+    return 'light';
   }
   
   const theme = detectTheme();
   
-  // 不同主题的样式配置
   const themes = {
     dark: {
       bg: 'rgba(26, 26, 46, 0.95)',
@@ -78,7 +76,6 @@
   
   const colors = themes[theme];
   
-  // 创建样式
   const style = document.createElement('style');
   style.textContent = `
     .auth-bar {
@@ -98,51 +95,11 @@
       border-bottom: 1px solid ${colors.borderColor};
       transition: all 0.3s ease;
     }
-    
-    .auth-bar-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .auth-bar-logo {
-      font-size: 18px;
-    }
-    
-    .auth-bar-title {
-      font-weight: 600;
-      color: ${colors.text};
-    }
-    
-    .auth-bar-title:hover {
-      color: ${colors.accent};
-    }
-    
-    .auth-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .auth-user {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .auth-user-link {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-    }
-    
-    .auth-user-link:hover .auth-username {
-      color: ${colors.accent};
-    }
-    
+    .auth-bar-left { display: flex; align-items: center; gap: 8px; }
+    .auth-bar-logo { font-size: 18px; }
+    .auth-bar-title { font-weight: 600; color: ${colors.text}; }
+    .auth-bar-title:hover { color: ${colors.accent}; }
+    .auth-bar-right { display: flex; align-items: center; gap: 10px; }
     .auth-avatar {
       width: 24px;
       height: 24px;
@@ -156,7 +113,6 @@
       font-weight: 600;
       object-fit: cover;
     }
-    
     .auth-username {
       max-width: 80px;
       overflow: hidden;
@@ -164,7 +120,6 @@
       white-space: nowrap;
       color: ${colors.text};
     }
-    
     .auth-btn {
       padding: 5px 14px;
       border-radius: 16px;
@@ -175,64 +130,35 @@
       transition: all 0.2s;
       white-space: nowrap;
     }
-    
     .auth-btn-login {
       background: ${colors.btnBg};
       color: ${colors.btnText};
     }
-    
     .auth-btn-login:hover {
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    
     .auth-btn-logout {
       background: transparent;
       color: ${colors.muted};
       border: 1px solid ${colors.borderColor};
     }
-    
     .auth-btn-logout:hover {
       color: ${colors.text};
       border-color: ${colors.accent};
     }
-    
-    /* 页面顶部留空间 */
-    body {
-      padding-top: 48px !important;
-    }
-    
-    /* 移动端适配 */
+    body { padding-top: 48px !important; }
     @media (max-width: 480px) {
-      .auth-bar {
-        padding: 8px 12px;
-      }
-      
-      .auth-bar-title {
-        font-size: 12px;
-      }
-      
-      .auth-username {
-        max-width: 50px;
-        font-size: 12px;
-      }
-      
-      .auth-btn {
-        padding: 4px 10px;
-        font-size: 11px;
-      }
+      .auth-bar { padding: 8px 12px; }
+      .auth-bar-title { font-size: 12px; }
+      .auth-username { max-width: 50px; font-size: 12px; }
+      .auth-btn { padding: 4px 10px; font-size: 11px; }
     }
-    
-    /* 大明王朝主题特殊字体 */
-    .auth-bar-daming {
-      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
-    }
+    .auth-bar-daming { font-family: "Noto Serif SC", "Source Han Serif SC", serif; }
   `;
   document.head.appendChild(style);
   
-  // 等待 DOM 加载完成
   document.addEventListener('DOMContentLoaded', function() {
-    // 创建登录栏
     const authBar = document.createElement('div');
     authBar.className = `auth-bar auth-bar-${theme}`;
     authBar.innerHTML = `
@@ -247,12 +173,9 @@
       </div>
     `;
     document.body.insertBefore(authBar, document.body.firstChild);
-    
-    // 更新 UI
     updateAuthUI();
   });
   
-  // 更新登录 UI
   function updateAuthUI() {
     const authContent = document.getElementById('authContent');
     if (!authContent) return;
@@ -263,7 +186,6 @@
       const avatarUrl = user?.avatar_url;
       const initial = displayName.charAt(0).toUpperCase();
       
-      // 如果有头像 URL，使用图片；否则使用首字母
       const avatarHtml = avatarUrl 
         ? `<img class="auth-avatar" src="${avatarUrl}" alt="${displayName}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="auth-avatar" style="display:none">${initial}</div>`
         : `<div class="auth-avatar">${initial}</div>`;
@@ -282,6 +204,5 @@
     }
   }
   
-  // 暴露更新函数
   window.updateAuthUI = updateAuthUI;
 })();
