@@ -165,9 +165,7 @@
           <button class="share-btn" onclick="nativeShare()" style="background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24); flex: 1;">
             📤 分享结果
           </button>
-          <button class="share-btn" onclick="getAIComment()" style="background: linear-gradient(135deg, #10b981, #059669); flex: 1;">
-            🤖 AI 解读我
-          </button>
+        </div>
         </div>
 
         <div class="feedback-box">
@@ -269,10 +267,10 @@
           text: shareText,
           url: shareUrl
         }).catch(() => {
-          fallbackCopy(shareText + '\n' + shareUrl);
+          fallbackCopy(shareText);
         });
       } else {
-        fallbackCopy(shareText + '\n' + shareUrl);
+        fallbackCopy(shareText);
       }
     }
 
