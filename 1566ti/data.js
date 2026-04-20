@@ -499,3 +499,4 @@ const DATA = {
     ]}
   ]
 };
+window.DATA = DATA;
