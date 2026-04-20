@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你的爱情人格是：... | LVTI 爱情观测试</title>
+  <meta name="description" content="测测你的爱情人格类型，发现你在亲密关系中的真实模式。">
+  <link rel="canonical" href="https://lvti.7e.ink/result.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LVTI 爱情观测试">
+  <meta property="og:description" content="测测你的爱情人格类型">
+  <meta property="og:url" content="https://lvti.7e.ink/">
+  <meta property="og:site_name" content="LVTI 爱情观测试">
+  <link rel="icon" href="favicon.ico">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+      background: linear-gradient(135deg, #fff0f3 0%, #ffd6e0 25%, #ffb8d0 50%, #ffc4d6 75%, #fff0f5 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      min-height: 100vh;
+      color: #5a3d4a;
+      padding-top: 48px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* 浮动爱心背景 */
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0.12;
+      animation: floatHeart 25s infinite linear;
+    }
+
+    .heart:nth-child(1) { left: 5%; animation-delay: 0s; font-size: 28px; }
+    .heart:nth-child(2) { left: 15%; animation-delay: -4s; font-size: 20px; }
+    .heart:nth-child(3) { left: 30%; animation-delay: -8s; font-size: 24px; }
+    .heart:nth-child(4) { left: 45%; animation-delay: -12s; font-size: 18px; }
+    .heart:nth-child(5) { left: 60%; animation-delay: -16s; font-size: 26px; }
+    .heart:nth-child(6) { left: 75%; animation-delay: -20s; font-size: 22px; }
+    .heart:nth-child(7) { left: 90%; animation-delay: -24s; font-size: 16px; }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+      10% { opacity: 0.12; }
+      90% { opacity: 0.12; }
+      100% {
+        transform: translateY(-100px) rotate(720deg) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 28px;
+      padding: 45px 40px;
+      box-shadow: 
+        0 20px 60px rgba(214, 51, 132, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+      backdrop-filter: blur(10px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, transparent 60%);
+      animation: cardGlow 10s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes cardGlow {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-20%, 20%); }
+    }
+
+    .type-badge {
+      font-size: 5em;
+      margin-bottom: 15px;
+      display: inline-block;
+      animation: bounce 2s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(214, 51, 132, 0.3));
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .type-code {
+      font-size: 1em;
+      color: #999;
+      margin-bottom: 8px;
+      letter-spacing: 3px;
+      font-weight: 500;
+    }
+
+    .type-name {
+      font-size: 2.8em;
+      background: linear-gradient(135deg, #d63384, #ff69b4, #ff85a2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 18px;
+      font-weight: bold;
+      filter: drop-shadow(0 2px 4px rgba(214, 51, 132, 0.2));
+    }
+
+    .type-desc {
+      font-size: 1.15em;
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .traits {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .trait {
+      background: linear-gradient(135deg, #fff5f7 0%, #ffe8ec 100%);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 0.95em;
+      color: #d63384;
+      border: 1px solid rgba(214, 51, 132, 0.15);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(214, 51, 132, 0.1);
+    }
+
+    .trait:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(214, 51, 132, 0.2);
+    }
+
+    .section {
+      text-align: left;
+      margin: 25px 0;
+      padding: 22px 24px;
+      background: linear-gradient(135deg, #fff8fa, #fff0f3);
+      border-radius: 20px;
+      border: 1px solid rgba(214, 51, 132, 0.08);
+      position: relative;
+      z-index: 1;
+    }
+
+    .section h3 {
+      color: #d63384;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .section li {
+      padding: 10px 0;
+      padding-left: 28px;
+      position: relative;
+      color: #5a3d4a;
+      line-height: 1.6;
+    }
+
+    .section li::before {
+      content: "✨";
+      position: absolute;
+      left: 0;
+      font-size: 0.9em;
+    }
+
+    .section.weakness li::before {
+      content: "💡";
+    }
+
+    .advice {
+      background: linear-gradient(135deg, #d63384 0%, #ff69b4 50%, #ff85a2 100%);
+      color: white;
+      padding: 28px;
+      border-radius: 20px;
+      margin: 28px 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3);
+    }
+
+    .advice h3 {
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+
+    .advice p {
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    .match-section {
+      margin: 30px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .match-section h3 {
+      color: #d63384;
+      margin-bottom: 18px;
+      font-size: 1.1em;
+    }
+
+    .match-types {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .match-type {
+      background: linear-gradient(135deg, #e8fff0, #d4f8e0);
+      padding: 14px 22px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .match-type:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(34, 197, 94, 0.2);
+    }
+
+    .match-type .name {
+      font-weight: 600;
+      color: #166534;
+    }
+
+    .match-type .code {
+      font-size: 0.85em;
+      color: #4ade80;
+      margin-top: 4px;
+    }
+
+    .scores {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 28px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .score-item {
+      background: linear-gradient(135deg, #fff8fa, #fff0f3);
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(214, 51, 132, 0.08);
+    }
+
+    .score-label {
+      font-size: 0.9em;
+      color: #999;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .score-bar {
+      height: 10px;
+      background: linear-gradient(90deg, #ffe8ec, #ffd6de);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .score-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 10px rgba(214, 51, 132, 0.4);
+    }
+
+    .score-value {
+      font-size: 0.95em;
+      color: #5a3d4a;
+      font-weight: 500;
+    }
+
+    /* AI 评论区域 */
+    .ai-section {
+      margin: 28px 0;
+      padding: 24px;
+      background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+      border-radius: 20px;
+      text-align: left;
+      border: 1px solid rgba(214, 51, 132, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-section h3 {
+      color: #be185d;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05em;
+    }
+
+    .ai-comment-text {
+      line-height: 1.9;
+      color: #5a3d4a;
+    }
+
+    .ai-comment-loading {
+      color: #999;
+      font-style: italic;
+    }
+
+    .ai-btn {
+      margin-top: 18px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #d63384, #ff69b4);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
+    }
+
+    .ai-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(214, 51, 132, 0.4);
+    }
+
+    .ai-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* 分享按钮 */
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin: 25px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 30px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: none;
+      color: white;
+      font-family: inherit;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .share-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 150px;
+      padding: 16px 28px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d63384, #ff69b4, #ff85a2);
+      color: white;
+      box-shadow: 0 4px 20px rgba(214, 51, 132, 0.3);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #fff, #f8f8f8);
+      color: #666;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #8b5a6b;
+      font-size: 0.9em;
+    }
+
+    .footer a {
+      color: #d63384;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #ff69b4;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .result-card {
+        padding: 30px 22px;
+        border-radius: 24px;
+      }
+
+      .type-badge {
+        font-size: 3.5em;
+      }
+
+      .type-name {
+        font-size: 2em;
+      }
+
+      .type-desc {
+        font-size: 1.05em;
+      }
+
+      .scores {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .share-buttons {
+        flex-direction: column;
+      }
+
+      .share-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .heart {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 浮动爱心背景 -->
+  <div class="floating-hearts">
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+    <div class="heart">💖</div>
+    <div class="heart">💝</div>
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+    <div class="heart">💖</div>
+  </div>
+
+  <div class="container">
+    <div class="result-card" id="resultCard">
+      <p>加载中...</p>
+    </div>
+
+    <div class="footer">
+      <a href="https://test.7e.ink">← 返回测试中心</a>
+      <span style="margin: 0 15px; opacity: 0.5;">|</span>
+      <a href="https://7e.ink">七亿主页</a>
+      <p style="margin-top: 15px;">© 2026 <a href="https://7e.ink">7e.ink</a></p>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>TestAuth.init('lvti');</script>
+  <script src="auth-ui.js"></script>
+  <script src="questions.js"></script>
+  <script src="results.js"></script>
+  <script>
+    let currentResult = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const resultData = JSON.parse(sessionStorage.getItem('lvti_result') || '{}');
+
+      if (!resultData.type) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const result = RESULT_TYPES[resultData.type];
+      const scores = resultData.scores;
+      currentResult = result;
+
+      // 保存结果到后端（如果已登录）
+      if (typeof TestAuth !== 'undefined' && TestAuth.isLoggedIn()) {
+        TestAuth.saveTestResult({
+          resultType: result.code,
+          resultName: result.name,
+          traits: result.traits,
+          scores: scores
+        }).then(function(res) {
+          if (res.success) {
+            console.log('LVTI 结果已保存');
+          }
+        });
+      }
+
+      // 渲染结果
+      const card = document.getElementById('resultCard');
+      card.innerHTML = `
+        <div class="type-badge">${result.emoji}</div>
+        <div class="type-code">${result.code}</div>
+        <h1 class="type-name">${result.name}</h1>
+        <p class="type-desc">${result.description}</p>
+
+        <div class="traits">
+          ${result.traits.map(t => `<span class="trait">${t}</span>`).join('')}
+        </div>
+
+        <div class="scores">
+          <div class="score-item">
+            <div class="score-label">💝 亲密需求</div>
+            <div class="score-bar">
+              <div class="score-fill" style="width: ${scores.intimacy.dominant === 'C' ? '75%' : '35%'}; background: linear-gradient(90deg, #d63384, #ff69b4);"></div>
+            </div>
+            <div class="score-value">${scores.intimacy.dominant === 'I' ? '🦋 独立型' : '💕 依恋型'}</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">💌 表达方式</div>
+            <div class="score-bar">
+              <div class="score-fill" style="width: ${scores.expression.dominant === 'E' ? '75%' : '35%'}; background: linear-gradient(90deg, #ff69b4, #ff85a2);"></div>
+            </div>
+            <div class="score-value">${scores.expression.dominant === 'S' ? '🤫 沉默型' : '💖 表达型'}</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">💎 承诺态度</div>
+            <div class="score-bar">
+              <div class="score-fill" style="width: ${scores.commitment.dominant === 'B' ? '75%' : '35%'}; background: linear-gradient(90deg, #f472b6, #fb7185);"></div>
+            </div>
+            <div class="score-value">${scores.commitment.dominant === 'F' ? '🦋 自由型' : '💍 承诺型'}</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">🌈 冲突处理</div>
+            <div class="score-bar">
+              <div class="score-fill" style="width: ${scores.conflict.dominant === 'H' ? '75%' : '35%'}; background: linear-gradient(90deg, #fb7185, #fda4af);"></div>
+            </div>
+            <div class="score-value">${scores.conflict.dominant === 'A' ? '🥺 回避型' : '💪 直面型'}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>✨ 你的优势</h3>
+          <ul>
+            ${result.strengths.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="section weakness">
+          <h3>💡 需要注意</h3>
+          <ul>
+            ${result.weaknesses.map(w => `<li>${w}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="advice">
+          <h3>💝 给你的建议</h3>
+          <p>${result.advice}</p>
+        </div>
+
+        <div class="match-section">
+          <h3>💕 最匹配的类型</h3>
+          <div class="match-types">
+            ${result.matchTypes.map(code => {
+              const match = RESULT_TYPES[code];
+              return match ? `
+                <div class="match-type">
+                  <div class="name">${match.emoji} ${match.name}</div>
+                  <div class="code">${code}</div>
+                </div>
+              ` : '';
+            }).join('')}
+          </div>
+        </div>
+
+        <!-- AI 评论区域 -->
+        <div class="ai-section">
+          <h3>🤖 AI 情感解读</h3>
+          <p class="ai-comment-text" id="aiCommentText">点击下方按钮，让 AI 为你解读这种爱情人格</p>
+          <button class="ai-btn" id="aiCommentBtn" onclick="getAIComment()">🤖 获取 AI 解读</button>
+        </div>
+
+        <!-- 分享按钮 -->
+        <div class="share-buttons">
+          <button class="share-btn" onclick="nativeShare()" style="background: linear-gradient(135deg, #d63384, #ff69b4, #ff85a2); flex: 1;">
+            📤 分享结果
+          </button>
+          <button class="share-btn" id="aiCommentBtn2" onclick="getAIComment()" style="background: linear-gradient(135deg, #10b981, #059669); flex: 1;">
+            🤖 AI 解读我
+          </button>
+        </div>
+
+        <!-- 反馈按钮 -->
+        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-secondary" style="flex: none; min-width: auto; padding: 12px 24px;" onclick="sendFeedback('good')">👍 准</button>
+          <button class="btn btn-secondary" style="flex: none; min-width: auto; padding: 12px 24px;" onclick="sendFeedback('ok')">🤔 一般</button>
+          <button class="btn btn-secondary" style="flex: none; min-width: auto; padding: 12px 24px;" onclick="sendFeedback('bad')">👎 不准</button>
+        </div>
+
+        <div class="buttons">
+          <a href="index.html" class="btn btn-primary">重新测试</a>
+        </div>
+      `;
+    });
+
+    // ========== AI 评论功能 ==========
+    function getAIComment() {
+      if (!currentResult) return;
+
+      const textEl = document.getElementById('aiCommentText');
+      const btn = document.getElementById('aiCommentBtn');
+
+      textEl.className = 'ai-comment-text ai-comment-loading';
+      textEl.textContent = 'AI 正在分析你的爱情人格...';
+      btn.disabled = true;
+      btn.textContent = '🤔 分析中...';
+
+      const prompt = `你是一个温暖幽默的情感咨询师，请用轻松有趣的方式解读以下爱情人格类型，150字左右：
+
+类型代码：${currentResult.code}
+类型名称：${currentResult.name}
+特点描述：${currentResult.description}
+关键词：${currentResult.traits.join('、')}
+
+要求：
+1. 简要分析这种爱情人格的特点
+2. 给一些温暖有趣的恋爱建议
+3. 语调轻松亲切，不要太严肃
+4. 最后一句要有意思`;
+
+      fetch('https://api-ai.7e.ink/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer sk-144b194p48250x5f6928401j082m2d0p'
+        },
+        body: JSON.stringify({
+          model: 'qwen3-1',
+          messages: [
+            { role: 'system', content: '你是一个温暖幽默的情感咨询师，擅长用轻松的方式解读爱情人格类型。' },
+            { role: 'user', content: prompt }
+          ],
+          max_tokens: 500
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+          textEl.className = 'ai-comment-text';
+          textEl.textContent = data.choices[0].message.content;
+        } else {
+          textEl.textContent = 'AI 分析失败，可能是你的爱情人格太独特了 😂';
+        }
+        btn.disabled = false;
+        btn.textContent = '🤖 再解读一次';
+      })
+      .catch(err => {
+        textEl.textContent = 'AI 连接失败，请稍后再试~';
+        btn.disabled = false;
+        btn.textContent = '🤖 重试';
+      });
+    }
+
+    // ========== 分享功能 ==========
+    function generateShareText() {
+      if (!currentResult) return '';
+      const intros = ['我测出来是', '没想到，我是', '原来我是', '测完发现我是'];
+      const intro = intros[Math.floor(Math.random() * intros.length)];
+      return `${intro}【${currentResult.name}】！\n${currentResult.description}\n\n快来测测你的爱情人格类型：https://lvti.7e.ink`;
+    }
+
+    // 原生分享（优先使用 Web Share API）
+    function nativeShare() {
+      if (!currentResult) return;
+
+      const shareText = generateShareText();
+      const shareUrl = 'https://lvti.7e.ink';
+
+      if (navigator.share) {
+        navigator.share({
+          title: 'LVTI 爱情观测试 - ' + currentResult.name,
+          text: shareText,
+          url: shareUrl
+        }).catch(() => {
+          fallbackCopy(shareText + '\n' + shareUrl);
+        });
+      } else {
+        fallbackCopy(shareText + '\n' + shareUrl);
+      }
+    }
+
+    // 复制到剪贴板
+    function fallbackCopy(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('✅ 结果已复制到剪贴板！\n可以粘贴分享给朋友了~');
+        }).catch(() => {
+          oldSchoolCopy(text);
+        });
+      } else {
+        oldSchoolCopy(text);
+      }
+    }
+
+    // 旧版复制
+    function oldSchoolCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      alert('✅ 结果已复制到剪贴板！\n可以粘贴分享给朋友了~');
+    }
+
+    function copyResult() {
+      const text = generateShareText();
+      fallbackCopy(text + '\nhttps://lvti.7e.ink');
+    }
+
+    // ========== 反馈功能 ==========
+    function sendFeedback(feedback) {
+      console.log('LVTI 反馈:', {
+        result: currentResult ? currentResult.name : '',
+        feedback: feedback
+      });
+      alert('感谢你的反馈 🙏');
+    }
+  </script>
+</body>
+</html>
