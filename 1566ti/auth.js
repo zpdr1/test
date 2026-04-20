@@ -9,7 +9,6 @@ const TEST_TYPES = {
   'plti.7e.ink': 'plti',
   'lvti.7e.ink': 'lvti',
   'ckti.7e.ink': 'ckti',
-  '1566.7e.ink': '1566',
   '1566ti.7e.ink': '1566'
 };
 

@@ -361,13 +361,13 @@ function shareResult() {
   
   if (!char) return;
   
-  const text = `我在《大明王朝1566》人物测试中是【${char.name}】！\n${char.desc.substring(0, 50)}...\n\n快来测测你是哪位人物：https://1566.7e.ink`;
+  const text = `我在《大明王朝1566》人物测试中是【${char.name}】！\n${char.desc.substring(0, 50)}...\n\n快来测测你是哪位人物：https://1566ti.7e.ink`;
   
   if (navigator.share) {
     navigator.share({
       title: '大明王朝1566 人物测试',
       text: text,
-      url: 'https://1566.7e.ink'
+      url: 'https://1566ti.7e.ink'
     }).catch(() => copyText(text));
   } else {
     copyText(text);
