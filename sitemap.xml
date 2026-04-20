@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 主站 -->
   <url>
     <loc>https://test.7e.ink/</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  
+  <!-- SBTI 沙壁人格测试 -->
+  <url>
+    <loc>https://sbti.7e.ink/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- PLTI 政治领导人测试 -->
+  <url>
+    <loc>https://plti.7e.ink/</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- LVTI 爱情观测试 -->
+  <url>
+    <loc>https://lvti.7e.ink/</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lvti.7e.ink/result.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- CKTI 财商测试 -->
+  <url>
+    <loc>https://ckti.7e.ink/</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ckti.7e.ink/result.html</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- 1566TI 大明王朝人物测试 -->
+  <url>
+    <loc>https://1566ti.7e.ink/</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
