@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你的财商类型是：... | CKTI 财商测试</title>
+  <meta name="description" content="测测你的理财风格和金钱观，了解你的财富潜力。">
+  <link rel="canonical" href="https://ckti.7e.ink/result.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CKTI 财商测试">
+  <meta property="og:description" content="测测你的理财风格和金钱观，了解你的财富潜力。">
+  <meta property="og:url" content="https://ckti.7e.ink/">
+  <meta property="og:site_name" content="CKTI 财商测试">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://api-ai.7e.ink">
+  <link rel="dns-prefetch" href="https://api-ai.7e.ink">
+</head>
+<body>
+  <div class="floating-coins">
+    <div class="coin">💰</div>
+    <div class="coin">🪙</div>
+    <div class="coin">💵</div>
+    <div class="coin">💎</div>
+    <div class="coin">💰</div>
+    <div class="coin">🪙</div>
+    <div class="coin">💵</div>
+  </div>
+
+  <div class="container">
+    <div class="result-card" id="resultCard">
+      <p>加载中...</p>
+    </div>
+
+    <div class="footer">
+      <a href="https://test.7e.ink">← 返回测试中心</a>
+      <span style="margin: 0 15px; opacity: 0.5;">|</span>
+      <a href="https://7e.ink">七亿主页</a>
+      <p style="margin-top: 15px;">© 2026 <a href="https://7e.ink">7e.ink</a></p>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="results.js"></script>
+  <script src="auth.js"></script>
+  <script>TestAuth.init('ckti');</script>
+  <script src="auth-ui.js"></script>
+  <script>
+    let currentResult = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const resultData = JSON.parse(sessionStorage.getItem('ckti_result') || '{}');
+
+      if (!resultData.type) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const result = RESULT_TYPES[resultData.type];
+      const scores = resultData.scores;
+      currentResult = result;
+
+      // 保存结果到后端
+      if (typeof TestAuth !== 'undefined' && TestAuth.isLoggedIn()) {
+        TestAuth.saveTestResult({
+          resultType: result.code,
+          resultName: result.name,
+          traits: result.traits,
+          scores: scores
+        });
+      }
+
+      // 维度标签映射
+      const dimLabels = {
+        spending: { F: '🧅 节俭型', S: '💳 消费型' },
+        investment: { C: '🛡️ 保守型', A: '🚀 激进型' },
+        risk: { R: '🔒 规避型', S: '🎯 冒险型' },
+        planning: { P: '📋 规划型', L: '🌊 随性型' }
+      };
+
+      // 渲染结果
+      const card = document.getElementById('resultCard');
+      card.innerHTML = `
+        <div class="type-badge">${result.emoji}</div>
+        <div class="type-code">${result.code}</div>
+        <h1 class="type-name">${result.name}</h1>
+        <p class="type-desc">${result.description}</p>
+
+        <div class="traits">
+          ${result.traits.map(t => `<span class="trait">${t}</span>`).join('')}
+        </div>
+
+        <div class="scores">
+          <div class="score-item">
+            <div class="score-label">💵 消费习惯</div>
+            <div class="score-bar">
+              <div class="score-fill" style="width: ${scores.spending.dominant === 'S' ? '75%' : '35%'}; background: linear-gradient(90deg, #d97706, #f59e0b);"></div>
+            </div>
+            <div class="score-value">${dimLabels.spending[scores.spending.dominant]}</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">📈 投资态度</div>
+            <div class="score-bar">
+              <div class="score-fill" style="width: ${scores.investment.dominant === 'A' ? '75%' : '35%'}; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
+            </div>
+            <div class="score-value">${dimLabels.investment[scores.investment.dominant]}</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">🎯 风险偏好</div>
+            <div class="score-bar">
+              <div class="score-fill" style="width: ${scores.risk.dominant === 'S' ? '75%' : '35%'}; background: linear-gradient(90deg, #fbbf24, #fcd34d);"></div>
+            </div>
+            <div class="score-value">${dimLabels.risk[scores.risk.dominant]}</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">📊 理财意识</div>
+            <div class="score-bar">
+              <div class="score-fill" style="width: ${scores.planning.dominant === 'P' ? '75%' : '35%'}; background: linear-gradient(90deg, #fcd34d, #fef08a);"></div>
+            </div>
+            <div class="score-value">${dimLabels.planning[scores.planning.dominant]}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>✨ 你的优势</h3>
+          <ul>
+            ${result.strengths.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="section weakness">
+          <h3>💡 需要注意</h3>
+          <ul>
+            ${result.weaknesses.map(w => `<li>${w}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="advice">
+          <h3>💰 给你的建议</h3>
+          <p>${result.advice}</p>
+        </div>
+
+        <div class="match-section">
+          <h3>💎 最匹配的类型</h3>
+          <div class="match-types">
+            ${result.matchTypes.map(code => {
+              const match = RESULT_TYPES[code];
+              return match ? `
+                <div class="match-type">
+                  <div class="name">${match.emoji} ${match.name}</div>
+                  <div class="code">${code}</div>
+                </div>
+              ` : '';
+            }).join('')}
+          </div>
+        </div>
+
+        <div class="ai-section">
+          <h3>🤖 AI 财商解读</h3>
+          <p class="ai-comment-text" id="aiCommentText">点击下方按钮，让 AI 为你解读这种财商类型</p>
+          <button class="ai-btn" id="aiCommentBtn" onclick="getAIComment()">🤖 获取 AI 解读</button>
+        </div>
+
+        <div class="share-buttons">
+          <button class="share-btn" onclick="nativeShare()" style="background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24); flex: 1;">
+            📤 分享结果
+          </button>
+          <button class="share-btn" onclick="getAIComment()" style="background: linear-gradient(135deg, #10b981, #059669); flex: 1;">
+            🤖 AI 解读我
+          </button>
+        </div>
+
+        <div class="feedback-box">
+          <button class="secondary" onclick="sendFeedback('good')">👍 准</button>
+          <button class="secondary" onclick="sendFeedback('ok')">🤔 一般</button>
+          <button class="secondary" onclick="sendFeedback('bad')">👎 不准</button>
+        </div>
+
+        <div class="btns" style="margin-top: 20px;">
+          <a href="index.html" class="btn primary">重新测试</a>
+        </div>
+
+        <p class="footer-note">
+          <a href="https://test.7e.ink" style="color: var(--accent);">← 返回测试中心</a>
+          <span style="color: var(--muted); margin: 0 8px;">|</span>
+          <a href="https://sbti.7e.ink" style="color: var(--muted);">试试 SBTI 人格测试</a>
+          <br>更多有趣测试，请访问 <a href="https://7e.ink" target="_blank">7e.ink</a>。
+        </p>
+      `;
+
+      card.style.display = 'block';
+    });
+
+    // AI 评论
+    function getAIComment() {
+      if (!currentResult) return;
+
+      const textEl = document.getElementById('aiCommentText');
+      const btn = document.getElementById('aiCommentBtn');
+
+      textEl.className = 'ai-comment-text ai-comment-loading';
+      textEl.textContent = 'AI 正在分析你的财商类型...';
+      btn.disabled = true;
+      btn.textContent = '🤔 分析中...';
+
+      const prompt = `你是一个幽默风趣的理财顾问，请用轻松有趣的方式解读以下财商类型，150字左右：
+
+类型代码：${currentResult.code}
+类型名称：${currentResult.name}
+特点描述：${currentResult.description}
+关键词：${currentResult.traits.join('、')}
+
+要求：
+1. 简要分析这种财商类型的特点
+2. 给一些温暖有趣的理财建议
+3. 语调轻松幽默，不要太严肃
+4. 最后一句要有意思`;
+
+      fetch('https://api-ai.7e.ink/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer sk-144b194p48250x5f6928401j082m2d0p'
+        },
+        body: JSON.stringify({
+          model: 'qwen3-1',
+          messages: [
+            { role: 'system', content: '你是一个幽默风趣的理财顾问，擅长用轻松的方式解读财商类型。' },
+            { role: 'user', content: prompt }
+          ],
+          max_tokens: 500
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+          textEl.className = 'ai-comment-text';
+          textEl.textContent = data.choices[0].message.content;
+        } else {
+          textEl.textContent = 'AI 分析失败，可能是你的财商类型太独特了 😂';
+        }
+        btn.disabled = false;
+        btn.textContent = '🤖 再解读一次';
+      })
+      .catch(err => {
+        textEl.textContent = 'AI 连接失败，请稍后再试~';
+        btn.disabled = false;
+        btn.textContent = '🤖 重试';
+      });
+    }
+
+    // 分享功能
+    function generateShareText() {
+      if (!currentResult) return '';
+      const intros = ['我测出来是', '没想到，我是', '原来我是', '测完发现我是'];
+      const intro = intros[Math.floor(Math.random() * intros.length)];
+      return `${intro}【${currentResult.name}】！\n${currentResult.description}\n\n快来测测你的财商类型：https://ckti.7e.ink`;
+    }
+
+    function nativeShare() {
+      if (!currentResult) return;
+
+      const shareText = generateShareText();
+      const shareUrl = 'https://ckti.7e.ink';
+
+      if (navigator.share) {
+        navigator.share({
+          title: 'CKTI 财商测试 - ' + currentResult.name,
+          text: shareText,
+          url: shareUrl
+        }).catch(() => {
+          fallbackCopy(shareText + '\n' + shareUrl);
+        });
+      } else {
+        fallbackCopy(shareText + '\n' + shareUrl);
+      }
+    }
+
+    function fallbackCopy(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('✅ 结果已复制到剪贴板！\n可以粘贴分享给朋友了~');
+        }).catch(() => {
+          oldSchoolCopy(text);
+        });
+      } else {
+        oldSchoolCopy(text);
+      }
+    }
+
+    function oldSchoolCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      alert('✅ 结果已复制到剪贴板！\n可以粘贴分享给朋友了~');
+    }
+
+    // 反馈功能
+    function sendFeedback(feedback) {
+      console.log('CKTI 反馈:', {
+        result: currentResult ? currentResult.name : '',
+        feedback: feedback
+      });
+      alert('感谢你的反馈 🙏');
+    }
+  </script>
+</body>
+</html>

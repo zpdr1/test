@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录中... - LVTI 爱情观测试</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5a3d4a;
+    }
+    .container { text-align: center; padding: 40px; max-width: 500px; }
+    .loader {
+      width: 50px; height: 50px;
+      border: 3px solid rgba(214, 51, 132, 0.3);
+      border-top-color: #d63384;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .success { color: #d63384; font-size: 48px; margin-bottom: 16px; }
+    .error-box {
+      background: rgba(255,255,255,0.7);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+    .error-detail {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 10px;
+      word-break: break-all;
+    }
+    a { color: #d63384; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="loader" id="loader"></div>
+    <h2 id="status">正在登录...</h2>
+    <div class="error-box" id="errorBox" style="display: none;">
+      <p id="errorMsg">登录失败</p>
+      <p class="error-detail" id="errorDetail"></p>
+      <p style="margin-top: 16px;"><a href="/">返回重试</a></p>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    TestAuth.init('lvti');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const error = urlParams.get('error');
+    const errorDesc = urlParams.get('error_description');
+
+    function showError(msg, detail) {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('status').textContent = '登录失败';
+      document.getElementById('errorBox').style.display = 'block';
+      document.getElementById('errorMsg').textContent = msg;
+      if (detail) {
+        document.getElementById('errorDetail').textContent = '详细信息: ' + detail;
+      }
+    }
+
+    function showSuccess() {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('status').innerHTML = '<span class="success">✓</span><br>登录成功！';
+    }
+
+    if (error) {
+      showError('授权被拒绝', errorDesc || error);
+    } else if (code) {
+      TestAuth.handleCallback(code).then(success => {
+        if (success) {
+          showSuccess();
+        } else {
+          showError('Token 交换失败，请查看控制台');
+        }
+      }).catch(err => {
+        showError('登录异常', err.message || String(err));
+      });
+    } else {
+      showError('缺少授权参数');
+    }
+  </script>
+</body>
+</html>

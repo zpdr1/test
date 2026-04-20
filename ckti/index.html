@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你的财商是什么水平？ | CKTI 财商测试指标</title>
+  <meta name="description" content="测测你的理财风格和金钱观，了解你的财富潜力。20道精选题目，16种财商类型，3分钟了解你的财商。">
+  <meta name="keywords" content="财商测试,理财风格,金钱观,财富测试,CKTI">
+  <link rel="canonical" href="https://ckti.7e.ink/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="你的财商是什么水平？">
+  <meta property="og:description" content="测测你的理财风格和金钱观，了解你的财富潜力。">
+  <meta property="og:url" content="https://ckti.7e.ink/">
+  <meta property="og:site_name" content="CKTI 财商测试">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://api-ai.7e.ink">
+  <link rel="dns-prefetch" href="https://api-ai.7e.ink">
+</head>
+<body>
+  <div class="floating-coins">
+    <div class="coin">💰</div>
+    <div class="coin">🪙</div>
+    <div class="coin">💵</div>
+    <div class="coin">💎</div>
+    <div class="coin">💰</div>
+    <div class="coin">🪙</div>
+    <div class="coin">💵</div>
+  </div>
+
+  <div class="container">
+    <div class="hero">
+      <div class="header-icon">💰</div>
+      <h1>你的财商是什么水平？</h1>
+      <p class="subtitle">这不是普通的测试，而是探索你的理财风格和金钱观。<br>全程约 3 分钟，20 道精选题目，发现你的财商类型。</p>
+      <div class="tags">
+        <span class="tag">💵 消费习惯</span>
+        <span class="tag">📈 投资态度</span>
+        <span class="tag">🎯 风险偏好</span>
+        <span class="tag">📊 理财意识</span>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 5%"></div>
+        </div>
+        <span class="progress-coin">🪙</span>
+      </div>
+
+      <div class="question-meta">
+        <span class="question-number">📍 <span id="questionNumber">第 1 / 20 题</span></span>
+        <span class="question-type" id="questionType">单选题</span>
+      </div>
+
+      <h2 class="question-text" id="questionText">加载中...</h2>
+
+      <div class="options" id="options"></div>
+
+      <div class="btns">
+        <button class="btn-prev" id="prevBtn" onclick="prevQuestion()" disabled>← 上一题</button>
+        <button class="btn-next" id="nextBtn" onclick="nextQuestion()">下一题 →</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="https://test.7e.ink">← 返回测试中心</a>
+      <span style="margin: 0 15px; opacity: 0.5;">|</span>
+      <a href="https://7e.ink">七亿主页</a>
+      <p style="margin-top: 15px;">© 2026 <a href="https://7e.ink">7e.ink</a> · 域名：ckti.7e.ink</p>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="results.js"></script>
+  <script src="app.js"></script>
+
+  <!-- 统一认证 -->
+  <script src="auth.js"></script>
+  <script>TestAuth.init('ckti');</script>
+  <script src="auth-ui.js"></script>
+</body>
+</html>
