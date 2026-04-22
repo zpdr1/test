@@ -7,6 +7,7 @@ const DATA = {
   chars: [
     {
       name: "嘉靖帝",
+      image: "images/jiajing.png",
       title: "世宗嘉靖皇帝 · 嘉靖朝最深邃的棋手",
       emoji: "👑",
       color: "#FFD700",
@@ -26,6 +27,7 @@ const DATA = {
     },
     {
       name: "海瑞",
+      image: "images/hairui.png",
       title: "户部主事 · 天下第一清官",
       emoji: "⚖️",
       color: "#E8E8E8",
@@ -42,6 +44,7 @@ const DATA = {
     },
     {
       name: "严嵩",
+      image: "images/yansong.png",
       title: "内阁首辅 · 权倾天下二十年",
       emoji: "🎭",
       color: "#BDC3C7",
@@ -59,6 +62,7 @@ const DATA = {
     },
     {
       name: "严世蕃",
+      image: "images/yanshifan.png",
       title: "工部侍郎 · 聪明反被聪明误",
       emoji: "🃏",
       color: "#E67E22",
@@ -75,6 +79,7 @@ const DATA = {
     },
     {
       name: "徐阶",
+      image: "images/xujie.png",
       title: "内阁次辅 · 卧薪尝胆的幕后棋手",
       emoji: "🌊",
       color: "#4A9EBF",
@@ -90,6 +95,7 @@ const DATA = {
     },
     {
       name: "胡宗宪",
+      image: "images/huzongxian.png",
       title: "浙直总督 · 夹缝中的悲剧英雄",
       emoji: "⚔️",
       color: "#A0856A",
@@ -106,6 +112,7 @@ const DATA = {
     },
     {
       name: "张居正",
+      image: "images/zhangjuzheng.png",
       title: "内阁首辅 · 千古一相",
       emoji: "📖",
       color: "#1A5276",
@@ -121,6 +128,7 @@ const DATA = {
     },
     {
       name: "杨金水",
+      image: "images/yangjinshui.png",
       title: "江南织造局太监 · 疯癫中的清醒者",
       emoji: "🎭",
       color: "#7D3C98",
@@ -136,6 +144,7 @@ const DATA = {
     },
     {
       name: "沈一石",
+      image: "images/shenyishi.png",
       title: "江南首富 · 悲剧商人",
       emoji: "💰",
       color: "#D4AC0D",
@@ -151,6 +160,7 @@ const DATA = {
     },
     {
       name: "吕芳",
+      image: "images/lvfang.png",
       title: "司礼监掌印太监 · 皇权与臣权之间的平衡者",
       emoji: "📿",
       color: "#7DCEA0",
@@ -166,6 +176,7 @@ const DATA = {
     },
     {
       name: "王阳明",
+      image: "images/wangyangming.png",
       title: "心学大师 · 知行合一的践行者",
       emoji: "🎋",
       color: "#2ECC71",
@@ -181,6 +192,7 @@ const DATA = {
     },
     {
       name: "陈洪",
+      image: "images/chenhong.png",
       title: "司礼监秉笔太监 · 严党的爪牙",
       emoji: "🐍",
       color: "#6C3461",
@@ -196,6 +208,7 @@ const DATA = {
     },
     {
       name: "齐大柱",
+      image: "images/qidazhu.png",
       title: "矿工领袖 · 民间抗争的代表",
       emoji: "⛏️",
       color: "#873600",
@@ -211,6 +224,7 @@ const DATA = {
     },
     {
       name: "高翰文",
+      image: "images/gaohanwen.png",
       title: "翰林院编修 · 清流中的明白人",
       emoji: "📚",
       color: "#85929E",
@@ -226,6 +240,7 @@ const DATA = {
     },
     {
       name: "李妃",
+      image: "images/lifei.png",
       title: "裕王妃 · 深明大义的贤德女子",
       emoji: "👸",
       color: "#E8DAEF",
@@ -241,6 +256,7 @@ const DATA = {
     },
     {
       name: "何心隐",
+      image: "images/hexinyin.png",
       title: "泰州学派传人 · 心学实践者",
       emoji: "☯️",
       color: "#5DADE2",
@@ -256,6 +272,7 @@ const DATA = {
     },
     {
       name: "冯保",
+      image: "images/fengbao.png",
       title: "司礼监秉笔太监 · 吕芳的心腹",
       emoji: "🦊",
       color: "#F39C12",

@@ -203,8 +203,13 @@ function renderClassicResult(result) {
   const card = document.getElementById('res-card');
   card.style.setProperty('--cc', winner.color);
   
+  // 生成人物插画HTML
+  const imageHtml = winner.image 
+    ? `<div class="res-avatar"><img src="${winner.image}" alt="${winner.name}" onerror="this.style.display='none'"></div>` 
+    : `<div class="res-emoji">${winner.emoji}</div>`;
+  
   card.innerHTML = `
-    <div class="res-emoji">${winner.emoji}</div>
+    ${imageHtml}
     <div class="res-title">${winner.title}</div>
     <h2 class="res-name" style="color: ${winner.color}">${winner.name}</h2>
     <div class="res-quote">"${quote}"</div>
