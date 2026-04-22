@@ -15,6 +15,7 @@
 |------|------|------|------|
 | 沙壁人格测试 | SBTI | https://sbti.7e.ink | ✅ 已上线 |
 | 政治领导人测试 | PLTI | https://plti.7e.ink | ✅ 已上线 |
+| 大明王朝1566人物测试 | 1566TI | https://1566ti.7e.ink | ✅ 已上线 |
 | 爱情观测试 | LVTI | https://lvti.7e.ink | ✅ 已上线 |
 | 财商测试 | CKTI | https://ckti.7e.ink | ✅ 已上线 |
 
@@ -129,6 +130,7 @@ await TestAuth.deleteSave(1);
   - https://plti.7e.ink/callback.html
   - https://lvti.7e.ink/callback.html
   - https://ckti.7e.ink/callback.html
+  - https://1566ti.7e.ink/callback.html
 
 ## 📁 文件结构
 
